@@ -71,22 +71,22 @@ class AppStorage implements LocalForageDbMethodsCore {
   async push<T>(
     key: string,
     value: T[],
-    unique = false,
+    // unique = false,
     callback?: ((err: any, value: Array<T>) => void) | undefined
   ) {
     const values = (await this.getItem<Array<T>>(key)) ?? [];
     return this.app.setItem<Array<T>>(key, [...values, ...value], callback);
   }
 
-  async pop<T>(
-    key: string,
-    valueKey: T,
-    uniqueKey: string,
-    callback?: ((err: any, value: Array<T>) => void) | undefined
-  ) {
-    const values = (await this.getItem<Array<T>>(key)) ?? [];
-    // return this.app.setItem<Array<T>>(key, [...values, ...value], callback);
-  }
+  // async pop<T>(
+  //   key: string,
+  //   // valueKey: T,
+  //   // uniqueKey: string,
+  //   // callback?: ((err: any, value: Array<T>) => void) | undefined
+  // ) {
+  //   // const values = (await this.getItem<Array<T>>(key)) ?? [];
+  //   // return this.app.setItem<Array<T>>(key, [...values, ...value], callback);
+  // }
 }
 
 const storage = new AppStorage();

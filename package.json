@@ -38,6 +38,7 @@
     "sass": "^1.64.2",
     "typescript": "^5.0.2",
     "vite": "^4.4.9",
+    "terser": "^5.19.3",
     "vite-plugin-compression": "^0.5.1"
   }
 }

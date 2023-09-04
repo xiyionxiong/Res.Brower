@@ -3,7 +3,6 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
-import localforage from "localforage";
 import { v4 } from "uuid";
 import storage from "../storage";
 
