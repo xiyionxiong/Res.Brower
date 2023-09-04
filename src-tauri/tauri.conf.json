@@ -51,7 +51,7 @@
       },
       "resources": [],
       "shortDescription": "",
-      "targets": "all",
+      "targets": ["dmg", "msi"],
       "windows": {
         "wix": {
           "language": "zh-CN"
