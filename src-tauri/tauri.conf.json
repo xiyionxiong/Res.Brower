@@ -7,8 +7,8 @@
     "distDir": "../build"
   },
   "package": {
-    "productName": "Res.Browser",
-    "version": "0.1.0"
+    "productName": "Res Browser",
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {

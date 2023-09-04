@@ -4,64 +4,44 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: '请输入打包的类型，默认profile 支持profile,release'
+        description: "请输入打包的类型，默认profile 支持profile,release"
         required: true
-        default: 'profile'
+        default: "profile"
         type: string
       version:
-        description: '请输入版本，默认1.0.0'
+        description: "请输入版本，默认1.0.0"
         required: true
-        default: '1.0.0'
+        default: "1.0.0"
         type: string
       code:
-        description: '请输入版本号，默认1'
+        description: "请输入版本号，默认1"
         required: true
-        default: '1'
+        default: "1"
         type: string
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Choco help
-        uses: crazy-max/ghaction-chocolatey@v2
+      - name: 更新代码
+        uses: actions/checkout@v3
+
+      - name: 安装node
+        uses: actions/setup-node@v3
         with:
-          args: -h
-      #  - run: Get-ChildItem env
-      - run: choco install innosetup
-      #  - name: 复制语言文件
-      #    run: Copy-Item windows\packaging\ChineseSimplified.isl -Destination C:\Users\muoon\AppData\Local\Programs\Inno Setup 6\Languages
+          node-version: "16.x"
 
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
+      - uses: actions-rs/toolchain@v1
         with:
-          channel: 'stable'
-      - run: flutter pub get
-      - run: flutter config --enable-windows-desktop
-      #  - run: flutter build windows
-      - name: 安装打包工具
-        run: dart pub global activate flutter_distributor
+          profile: minimal
+          toolchain: stable
+          override: true
 
-      #  - name: Copy VC redistributables to release directory for Windows
-      #    run: |
-      #       Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\msvcp140.dll') .
-      #       Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\vcruntime140.dll') .
-      #       Copy-Item (vswhere -latest -find 'VC\Redist\MSVC\*\x64\*\vcruntime140_1.dll') .
-      #    working-directory: build\windows\runner\Release
+      - run: npm install
+      - run: npm run tauri build
 
-      - name: 打包windows
-        run: flutter_distributor package --platform windows --targets exe --flutter-build-args=${{ github.event.inputs.mode }}
-
-      - name: 重命名
-        run: Move-Item  -path ".\*.exe" -destination  windows-setup.exe
-        working-directory: dist/${{ github.event.inputs.version }}+${{ github.event.inputs.code }}
-
-      - name: 查看文件
-        run: ls
-        working-directory: dist/${{ github.event.inputs.version }}+${{ github.event.inputs.code }}
-
-      - name: Upload window Artifact
+      - name: 上传macos Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wisecloud-${{ github.event.inputs.version }}+${{ github.event.inputs.code }}-${{ github.event.inputs.mode }}-windows-setup.exe
-          path: dist/${{ github.event.inputs.version }}+${{ github.event.inputs.code }}/windows-setup.exe
+          name: Res Browser_${{ github.event.inputs.version }}_x64.exe
+          path: src-tauri/target/release/bundle/dmg/Res Browser_${{ github.event.inputs.version }}_x64.exe

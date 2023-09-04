@@ -3,10 +3,10 @@ name: flutter-macos
 on:
   workflow_dispatch:
     inputs:
-      mode:
-        description: "请输入打包的类型，默认profile 支持profile,release"
+      version:
+        description: "请输入版本，默认1.0.0"
         required: true
-        default: "profile"
+        default: "1.0.0"
         type: string
 
 jobs:
@@ -33,5 +33,5 @@ jobs:
       - name: 上传macos Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: macos.dmg
-          path: dist/${{ github.event.inputs.version }}+${{ github.event.inputs.code }}/macos.dmg
+          name: Res Browser_${{ github.event.inputs.version }}_x64.dmg
+          path: src-tauri/target/release/bundle/dmg/Res Browser_${{ github.event.inputs.version }}_x64.dmg
