@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "tauri": "tauri",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -21,6 +22,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^1.4.0",
     "@types/node": "^20.4.8",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^18.2.18",

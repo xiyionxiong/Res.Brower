@@ -30,7 +30,7 @@ export default defineConfig({
   },
 
   build: {
-    outDir: "www",
+    outDir: "build",
     minify: "terser",
     target: "ES2020",
     terserOptions: {
