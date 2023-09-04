@@ -33,5 +33,5 @@ jobs:
       - name: 上传macos Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Res Browser_${{ github.event.inputs.version }}_x64.exe
-          path: src-tauri/target/release/bundle/dmg/Res Browser_${{ github.event.inputs.version }}_x64.exe
+          name: Res Browser_${{ github.event.inputs.version }}_x64_en-US.msi
+          path: src-tauri\target\release\bundle\msi\Res Browser_${{ github.event.inputs.version }}_x64_en-US.msi
