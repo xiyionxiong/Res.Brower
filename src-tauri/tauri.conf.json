@@ -70,11 +70,15 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 768,
         "resizable": true,
         "title": "Res.Broswer",
-        "width": 800
+        "width": 1244,
+        "transparent": true,
+        "decorations": false,
+        "hiddenTitle": true
       }
-    ]
+    ],
+    "macOSPrivateApi": true
   }
 }
