@@ -101,10 +101,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 768,
-        "resizable": true,
+        "height": 512,
+        "resizable": false,
         "title": "Res.Broswer",
-        "width": 1244,
+        "width": 900,
         "transparent": true,
         "decorations": false,
         "hiddenTitle": true

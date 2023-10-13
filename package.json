@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fluentui/react-components": "^9.35.0",
     "@tauri-apps/api": "^1.5.0",
     "axios": "^1.4.0",
     "localforage": "^1.10.0",

@@ -1,76 +1,83 @@
-import "./App.css";
-import { WebviewWindow } from "@tauri-apps/api/window";
+import {
+  Card,
+  Tab,
+  TabList,
+  makeStyles,
+  shorthands,
+} from "@fluentui/react-components";
 
-import { createScheduler, createWorker } from "tesseract.js";
+import {
+  Cloud48Filled,
+  ContentViewGalleryFilled,
+  Settings16Filled,
+} from "@fluentui/react-icons";
+import "./App.css";
+
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    height: "calc(100vh - 22px)",
+  },
+
+  hello: {
+    backgroundColor: "#f6f6f6ba",
+    ...shorthands.margin("0", "12px", "", ""),
+    ...shorthands.padding("16px"),
+    ...shorthands.borderRadius("12px"),
+    ...shorthands.flex(1),
+    ...shorthands.border("1px", "solid", "#f6f6f6ba"),
+    // boxShadow: "inset 0 0 0 3000px rgba(255,255,255,0.3)",
+  },
+});
 
 function App() {
+  const styles = useStyles();
+
   return (
-    <>
-      <p className="read-the-docs">试试就试试。</p>
-
-      <button
-        type="button"
-        onClick={() => {
-          const input = document.createElement("input");
-          input.type = "file";
-          input.addEventListener("change", async (e) => {
-            console.log(input.files);
-            if (input.files!.length === 0) return;
-            const file = input.files![0];
-
-            // const worker = await createWorker("eng+chi_sim");
-
-            const scheduler = createScheduler();
-            const worker1 = await createWorker("eng");
-            const worker2 = await createWorker("eng");
-            scheduler.addWorker(worker1);
-            scheduler.addWorker(worker2);
-            /** Add 10 recognition jobs */
-            const results = await Promise.all(
-              Array(10)
-                .fill(0)
-                .map(() => scheduler.addJob("recognize", file))
-            );
-            console.log(results);
-            await scheduler.terminate(); // It also terminates all workers.
-
-            // const data = await worker.recognize(file);
-            // console.log(data);
-            // await worker.terminate();
-          });
-          input.click();
+    <div>
+      <div
+        data-tauri-drag-region
+        style={{
+          height: "10px",
+          background: "rgba(255,255,255,0.1)",
+          borderRadius: "12px 12px 0 0",
         }}
-      >
-        选择图片
-      </button>
+      ></div>
+      <div className={styles.root}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <TabList
+            defaultSelectedValue="tab2"
+            vertical
+            style={{ background: "transparent", color: "white" }}
+          >
+            <Tab
+              icon={<Cloud48Filled />}
+              value="tab1"
+              style={{ color: "white" }}
+            >
+              上传
+            </Tab>
 
-      <button
-        onClick={() => {
-          const webview = new WebviewWindow("my-label", {
-            url: "src/app.html",
-            transparent: false,
-            resizable: true,
-            decorations: false,
-            width: 375,
-            height: 667,
-          });
+            <Tab icon={<ContentViewGalleryFilled />} value="tab2">
+              相册
+            </Tab>
+          </TabList>
 
-          localStorage.setItem("my", "i love u");
+          <div style={{ flex: 1 }} />
 
-          webview.once("tauri://created", function () {
-            // webview window successfully created
+          <TabList
+            vertical
+            style={{ background: "transparent", color: "white" }}
+          >
+            <Tab icon={<Settings16Filled />} value="tab4">
+              设置
+            </Tab>
+          </TabList>
+        </div>
 
-            console.log("created>>");
-          });
-          webview.once("tauri://error", function (e) {
-            // an error happened creating the webview window
-            console.log("error>>", e);
-          });
-        }}
-      >
-        打开子页面
-      </button>
-    </>
+        <Card className={styles.hello}>content</Card>
+      </div>
+    </div>
   );
 }
 
