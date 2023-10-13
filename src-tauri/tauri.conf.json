@@ -4,7 +4,8 @@
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:1603",
-    "distDir": "../build"
+    "distDir": "../build",
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "Res Browser",
@@ -12,17 +13,47 @@
   },
   "tauri": {
     "allowlist": {
+      "window": {
+        "all": true,
+        "create": true,
+        "center": true,
+        "requestUserAttention": true,
+        "setResizable": true,
+        "setMaximizable": true,
+        "setMinimizable": true,
+        "setClosable": true,
+        "setTitle": true,
+        "maximize": true,
+        "unmaximize": true,
+        "minimize": true,
+        "unminimize": true,
+        "show": true,
+        "hide": true,
+        "close": true,
+        "setDecorations": true,
+        "setAlwaysOnTop": true,
+        "setContentProtected": true,
+        "setSize": true,
+        "setMinSize": true,
+        "setMaxSize": true,
+        "setPosition": true,
+        "setFullscreen": true,
+        "setFocus": true,
+        "setIcon": true,
+        "setSkipTaskbar": true,
+        "setCursorGrab": true,
+        "setCursorVisible": true,
+        "setCursorIcon": true,
+        "setCursorPosition": true,
+        "setIgnoreCursorEvents": true,
+        "startDragging": true,
+        "print": true
+      },
       "all": true,
       "http": {
         "all": true,
         "request": true,
-        "scope": [
-          "https://*",
-          "http://*",
-          "http://192.168.1.24:3001/*",
-          "https://vip.58yiqibang.com/bang-web/*",
-          "http://twmp.58yiqibang.com/bang-web/*"
-        ]
+        "scope": ["https://*", "http://*", "http://192.168.1.24:3001/*"]
       }
     },
     "bundle": {
